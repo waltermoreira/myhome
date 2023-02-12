@@ -12,18 +12,35 @@
 
   outputs = { nixpkgs, home-manager, ... }:
     let
-      system = "x86_64-darwin";
-      pkgs = nixpkgs.legacyPackages.${system};
-    in {
-      homeConfigurations.walter = home-manager.lib.homeManagerConfiguration {
-        inherit pkgs;
-
-        # Specify your home configuration modules here, for example,
-        # the path to your home.nix.
-        modules = [ ./home.nix ];
-
-        # Optionally use extraSpecialArgs
-        # to pass through arguments to home.nix
+      homes = {
+        cnt = {
+          username = "waltermoreira";
+          homeDirectory = "/Users/waltermoreira";
+          email = "wmoreira@cnt.canon.com";
+          system = "x86_64-darwin";
+        };
+        limaVm = {
+          username = "waltermoreira";
+          homeDirectory = "/home/waltermoreira.linux";
+          email = "walter@waltermoreira.net";
+          system = "x86_64-linux";
+        };
+        calvin = {
+          username = "walter";
+          homeDirectory = "/Users/walter";
+          email = "walter@waltermoreira.net";
+          system = "x86_64-darwin";
+        };
       };
+      configurationForHome = systemName: data: 
+        home-manager.lib.homeManagerConfiguration {
+          pkgs = nixpkgs.legacyPackages.${data.system};
+          modules = [ ./home.nix ];
+          extraSpecialArgs = {
+            inherit systemName data;
+          };
+        };
+    in {
+      homeConfigurations = builtins.mapAttrs configurationForHome homes;
     };
 }

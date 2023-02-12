@@ -1,11 +1,11 @@
-{ config, pkgs, ... }:
+{ config, pkgs, systemName, data, ... }:
 
 {
   # Home Manager needs a bit of information about you and the
   # paths it should manage.
   home.username = "waltermoreira";
   home.homeDirectory = "/Users/waltermoreira";
-  home.sessionVariables = { FOO = "foo"; };
+  home.sessionVariables = { FOO = "${systemName}"; };
 
   home.packages = [
     pkgs.bashInteractive

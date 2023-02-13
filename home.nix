@@ -64,4 +64,11 @@
       };
     };
   };
+  
+  programs.bat.enable = true;
+  programs.exa = {
+    enable = true;
+    enableAliases = true;
+  };
 }
+

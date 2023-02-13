@@ -3,12 +3,14 @@
 {
   # Home Manager needs a bit of information about you and the
   # paths it should manage.
-  home.username = "waltermoreira";
-  home.homeDirectory = "/Users/waltermoreira";
-  home.sessionVariables = { FOO = "${systemName}"; };
+  home.username = data.username;
+  home.homeDirectory = data.homeDirectory;
 
-  home.packages = [
-    pkgs.bashInteractive
+  home.packages = with pkgs; [
+    bashInteractive
+    fzf-zsh
+    zsh-fzf-tab
+    fzf
   ];
 
   # This value determines the Home Manager release that your
@@ -26,22 +28,40 @@
 
   programs.vim = {
     enable = true;
-    settings = {
-      background = "light";
-    };
-    extraConfig = ''
-      syntax off
-    '';
     defaultEditor = true;
   };
 
   programs.git = {
     enable = true;
-    userName = "Foo Bar";
-    userEmail = "foo@bar.com";
+    userName = data.fullName;
+    userEmail = data.email;
   };
 
-  programs.bash = {
+  programs.zsh = {
     enable = true;
+    enableAutosuggestions = true;
+    enableSyntaxHighlighting = true;
+    plugins = [
+      {
+        name = "fzf";
+        src = "${pkgs.fzf-zsh}/share/zsh/plugins";
+      }
+    ];
+    oh-my-zsh = {
+      enable = true;
+      theme = "robbyrussell";
+    };
+  };
+
+  programs.starship = {
+    enable = true;
+    package = pkgs.starship;
+    enableZshIntegration = true;
+    settings = {
+      character = {
+        success_symbol = "[➜](bold green)";
+        error_symbol = "[➜](bold red)";
+      };
+    };
   };
 }

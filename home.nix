@@ -5,6 +5,9 @@
   # paths it should manage.
   home.username = data.username;
   home.homeDirectory = data.homeDirectory;
+  home.sessionVariables = {
+    FOO = "foo";
+  };
 
   home.packages = with pkgs; [
     bashInteractive
@@ -44,12 +47,17 @@
     plugins = [
       {
         name = "fzf";
-        src = "${pkgs.fzf-zsh}/share/zsh/plugins";
+        src = "${pkgs.fzf-zsh}/share/zsh/plugins/fzf-zsh";
+      }
+      {
+        name = "fzf-tab";
+        src = "${pkgs.zsh-fzf-tab}/share/fzf-tab";
       }
     ];
     oh-my-zsh = {
       enable = true;
       theme = "robbyrussell";
+      plugins = [ "fzf" ];
     };
   };
 
@@ -62,9 +70,92 @@
         success_symbol = "[➜](bold green)";
         error_symbol = "[➜](bold red)";
       };
+      aws.disabled = true;
+      azure.disabled = true;
+      buf.disabled = true;
+      bun.disabled = true;
+      cmake.disabled = true;
+      cobol.disabled = true;
+      cmd_duration.format = ''[\[⏱ $duration\]]($style)'';
+      conda.disabled = true;
+      crystal.disabled = true;
+      daml.disabled = true;
+      dart.disabled = true;
+      deno.disabled = true;
+      directory = {
+        format = ''[\[[$path]($style)[$read_only]($read_only_style)\]]($style)'';
+      };
+      docker_context.disabled = true;
+      dotnet.disabled = true;
+      elixir.disabled = true;
+      elm.disabled = true;
+      erlang.disabled = true;
+      gcloud.disabled = true;
+      git_branch = {
+        format = ''[\[$symbol$branch(:$remote_branch)\]]($style)'';
+      };
+      git_status = {
+        format = ''([\[$all_status$ahead_behind\]]($style))'';
+      };
+      golang.disabled = true;
+      guix_shell.disabled = true;
+      haskell = {
+        format = ''[\[$symbol($version)\]]($style)'';
+      };
+      haxe.disabled = true;
+      helm.disabled = true;
+      hostname = {
+        ssh_symbol = "🌐";
+        format = ''[\[$ssh_symbol$hostname\]]($style)'';
+      };
+      java.disabled = true;
+      julia.disabled = true;
+      kotlin.disabled = true;
+      lua.disabled = true;
+      meson.disabled = true;
+      hg_branch.disabled = true;
+      nim.disabled = true;
+      nix_shell = {
+        format = ''[\[$symbol$state( \($name\))\]]($style)'';
+      };
+      nodejs = {
+        format = ''[\[$symbol($version)\]]($style)'';
+      };
+      ocaml.disabled = true;
+      opa.disabled = true;
+      openstack.disabled = true;
+      os.disabled = false;
+      package = {
+        format = ''[\[$symbol$version\]]($style)'';
+      };
+      perl.disabled = true;
+      php.disabled = true;
+      pulumi.disabled = true;
+      purescript.disabled = true;
+      python = {
+        format = ''[\[$symbol$pyenv_prefix($version)(\($virtualenv\))\]]($style)'';
+      };
+      rlang.disabled = true;
+      raku.disabled = true;
+      ruby.disabled = true;
+      rust = {
+        format = ''[\[$symbol($version)\]]($style)'';
+      };
+      scala.disabled = true;
+      singularity.disabled = true;
+      spack.disabled = true;
+      swift.disabled = true;
+      terraform.disabled = true;
+      username = {
+        format = ''[\[$user\]]($style)'';
+      };
+      vagrant.disabled = true;
+      vlang.disabled = true;
+      vcsh.disabled = true;
+      zig.disabled = true;
     };
   };
-  
+
   programs.bat.enable = true;
   programs.exa = {
     enable = true;

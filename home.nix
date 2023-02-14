@@ -15,6 +15,7 @@
     zsh-fzf-tab
     fzf
     ripgrep
+    bat-extras.batpipe
   ];
 
   # This value determines the Home Manager release that your
@@ -50,6 +51,11 @@
     enable = true;
     enableAutosuggestions = true;
     enableSyntaxHighlighting = false;
+    envExtra = ''
+      eval "$(batpipe)"
+      alias dotgit='git --git-dir=$HOME/.dots --work-tree=$HOME'
+      dotgit config --local status.showUntrackedFiles no
+    '';
     plugins = [
       {
         name = "fzf";

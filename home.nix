@@ -14,6 +14,7 @@
     fzf-zsh
     zsh-fzf-tab
     fzf
+    ripgrep
   ];
 
   # This value determines the Home Manager release that your
@@ -29,6 +30,11 @@
   # Let Home Manager install and manage itself.
   programs.home-manager.enable = true;
 
+  programs.exa = {
+    enable = true;
+    enableAliases = true;
+  };
+
   programs.vim = {
     enable = true;
     defaultEditor = true;
@@ -43,7 +49,7 @@
   programs.zsh = {
     enable = true;
     enableAutosuggestions = true;
-    enableSyntaxHighlighting = true;
+    enableSyntaxHighlighting = false;
     plugins = [
       {
         name = "fzf";
@@ -58,6 +64,9 @@
       enable = true;
       theme = "robbyrussell";
       plugins = [ "fzf" ];
+    };
+    shellAliases = {
+      l = "ls -la";
     };
   };
 
@@ -124,7 +133,12 @@
       ocaml.disabled = true;
       opa.disabled = true;
       openstack.disabled = true;
-      os.disabled = false;
+      os = {
+        disabled = false;
+        symbols = {
+          Macos = "⌘ ";
+        };
+      };
       package = {
         format = ''[\[$symbol$version\]]($style)'';
       };
@@ -157,9 +171,5 @@
   };
 
   programs.bat.enable = true;
-  programs.exa = {
-    enable = true;
-    enableAliases = true;
-  };
 }
 

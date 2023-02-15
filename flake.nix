@@ -12,9 +12,13 @@
       url = "github:lnl7/nix-darwin";
       inputs.nixpkgs.follows = "nixpkgs";
     };
+    rust-overlay = {
+      url = "github:oxalica/rust-overlay";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
   };
 
-  outputs = { nixpkgs, home-manager, darwin, ... }:
+  outputs = { nixpkgs, home-manager, darwin, rust-overlay, ... }:
     let
       fullName = "Walter Moreira";
       homes = {
@@ -40,9 +44,14 @@
           system = "x86_64-darwin";
         };
       };
+      pkgsForSystem = system:
+        import nixpkgs {
+          inherit system;
+          overlays = [ (import rust-overlay) ];
+        };
       configurationForHome = systemName: data:
         home-manager.lib.homeManagerConfiguration {
-          pkgs = nixpkgs.legacyPackages.${data.system};
+          pkgs = (pkgsForSystem data.system);
           modules = [ ./home.nix ];
           extraSpecialArgs = {
             inherit systemName data;
@@ -57,7 +66,7 @@
             {
               home-manager.useGlobalPkgs = true;
               home-manager.useUserPackages = true;
-              home-manager.users.waltermoreira = import ./home.nix;
+              home-manager.users.${data.username} = import ./home.nix;
 
               users = {
                 users = {
@@ -73,6 +82,7 @@
               # arguments to home.nix
               home-manager.extraSpecialArgs = {
                 inherit systemName data;
+                pkgs = (pkgsForSystem data.system);
               };
             }
           ];

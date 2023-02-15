@@ -18,6 +18,16 @@
     bat-extras.batpipe
     starship
     ponysay
+    (rust-bin.stable.latest.default.override
+      {
+        targets = [
+          "wasm32-unknown-unknown"
+          "x86_64-unknown-linux-gnu"
+          "aarch64-unknown-linux-gnu"
+          "x86_64-apple-darwin"
+          "aarch64-apple-darwin"
+        ];
+      })
   ];
 
   # This value determines the Home Manager release that your
@@ -55,8 +65,12 @@
     enableSyntaxHighlighting = false;
     envExtra = ''
       eval "$(batpipe)"
-      alias dotgit='git --git-dir=$HOME/.dots --work-tree=$HOME'
-      dotgit config --local status.showUntrackedFiles no
+      if [[ -d $HOME/.dots ]]; then
+        dotgit() { git --git-dir=$HOME/.dots --work-tree=$HOME $* }
+        dotgit config --local status.showUntrackedFiles no
+      else
+        echo "dotgit is not cloned... ignoring"
+      fi
     '';
     plugins = [
       {

@@ -20,4 +20,5 @@
   programs.zsh.enable = true; # default shell on catalina
   # programs.fish.enable = true;
 
+  system.defaults.dock.orientation = "right";
 }

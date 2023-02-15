@@ -16,6 +16,8 @@
     fzf
     ripgrep
     bat-extras.batpipe
+    starship
+    ponysay
   ];
 
   # This value determines the Home Manager release that your

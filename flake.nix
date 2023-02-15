@@ -1,5 +1,5 @@
 {
-  description = "Home Manager configuration of Walter";
+  description = "Walter's Home Manager configuration";
 
   inputs = {
     # Specify the source of Home Manager and Nixpkgs.
@@ -8,9 +8,13 @@
       url = "github:nix-community/home-manager";
       inputs.nixpkgs.follows = "nixpkgs";
     };
+    darwin = {
+      url = "github:lnl7/nix-darwin";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
   };
 
-  outputs = { nixpkgs, home-manager, ... }:
+  outputs = { nixpkgs, home-manager, darwin, ... }:
     let
       fullName = "Walter Moreira";
       homes = {
@@ -36,7 +40,7 @@
           system = "x86_64-darwin";
         };
       };
-      configurationForHome = systemName: data: 
+      configurationForHome = systemName: data:
         home-manager.lib.homeManagerConfiguration {
           pkgs = nixpkgs.legacyPackages.${data.system};
           modules = [ ./home.nix ];
@@ -44,7 +48,38 @@
             inherit systemName data;
           };
         };
-    in {
+      darwinConfiguration = systemName: data:
+        darwin.lib.darwinSystem {
+          system = "x86_64-darwin";
+          modules = [
+            ./darwin.nix
+            home-manager.darwinModules.home-manager
+            {
+              home-manager.useGlobalPkgs = true;
+              home-manager.useUserPackages = true;
+              home-manager.users.waltermoreira = import ./home.nix;
+
+              users = {
+                users = {
+                  waltermoreira = {
+                    shell = nixpkgs.legacyPackages.${data.system}.zsh;
+                    description = data.fullName;
+                    home = data.homeDirectory;
+                  };
+                };
+              };
+
+              # Optionally, use home-manager.extraSpecialArgs to pass
+              # arguments to home.nix
+              home-manager.extraSpecialArgs = {
+                inherit systemName data;
+              };
+            }
+          ];
+        };
+    in
+    {
       homeConfigurations = builtins.mapAttrs configurationForHome homes;
+      darwinConfigurations = builtins.mapAttrs darwinConfiguration homes;
     };
 }

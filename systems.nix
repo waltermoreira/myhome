@@ -1,5 +1,6 @@
 let
   fullName = "Walter Moreira";
+  mainEmail = "walter@waltermoreira.net";
 in
 {
   cnt = {
@@ -14,7 +15,7 @@ in
     inherit fullName;
     username = "waltermoreira";
     homeDirectory = "/home/waltermoreira.linux";
-    email = "walter@waltermoreira.net";
+    email = mainEmail;
     system = "x86_64-linux";
     hostname = "lima-nix";
   };
@@ -22,7 +23,7 @@ in
     inherit fullName;
     username = "walter";
     homeDirectory = "/Users/walter";
-    email = "walter@waltermoreira.net";
+    email = mainEmail;
     system = "x86_64-darwin";
     hostname = "calvin";
   };

@@ -1,4 +1,4 @@
-{ config, pkgs, ... }:
+{ config, pkgs, systemName, data, ... }:
 
 {
   services.nix-daemon.enable = true;
@@ -27,7 +27,7 @@
       autohide = true;
     };
   };
-  networking.computerName = "Walters Macbook Pro CNT";
+  networking.computerName = data.hostname;
 
   environment.shellAliases = {
     fooAlias = "echo 'foo alias'";

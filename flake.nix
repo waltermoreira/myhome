@@ -61,7 +61,6 @@
         darwin.lib.darwinSystem {
           system = "x86_64-darwin";
           modules = [
-            ./darwin.nix
             home-manager.darwinModules.home-manager
             {
               home-manager.useGlobalPkgs = true;
@@ -85,6 +84,7 @@
                 pkgs = (pkgsForSystem data.system);
               };
             }
+            ./darwin.nix
           ];
         };
     in

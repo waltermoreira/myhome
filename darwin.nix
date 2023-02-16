@@ -21,4 +21,15 @@
   # programs.fish.enable = true;
 
   system.defaults.dock.orientation = "right";
+  system.defaults.CustomUserPreferences = {
+    "com.apple.dock" = {
+      orientation = "left";
+      autohide = false;
+    };
+  };
+  networking.computerName = "Walters Macbook Pro CNT";
+
+  environment.shellAliases = {
+    fooAlias = "echo 'foo alias'";
+  };
 }

@@ -6,7 +6,7 @@
   home.username = data.username;
   home.homeDirectory = data.homeDirectory;
   home.sessionVariables = {
-    FOO = "foo";
+    FOO = "foobar";
   };
 
   home.packages = with pkgs; [
@@ -18,6 +18,7 @@
     bat-extras.batpipe
     starship
     ponysay
+    lesspipe
     (rust-bin.stable.latest.default.override
       {
         targets = [
@@ -64,7 +65,6 @@
     enableAutosuggestions = true;
     enableSyntaxHighlighting = false;
     envExtra = ''
-      eval "$(batpipe)"
       if [[ -d $HOME/.dots ]]; then
         dotgit() { git --git-dir=$HOME/.dots --work-tree=$HOME $* }
         dotgit config --local status.showUntrackedFiles no
@@ -193,5 +193,8 @@
   };
 
   programs.bat.enable = true;
+  programs.less.enable = true;
+  programs.lesspipe.enable = true;
+
 }
 

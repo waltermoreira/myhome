@@ -32,4 +32,15 @@
   environment.shellAliases = {
     fooAlias = "echo 'foo alias'";
   };
+
+  system.activationScripts.preActivation.text = ''
+    echo "In preActivation"
+  '';
+
+  homebrew = {
+    enable = true;
+    brews = [
+      "lima"
+    ];
+  };
 }

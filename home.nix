@@ -11,6 +11,7 @@
 
   home.packages = with pkgs; [
     bashInteractive
+    gitFull
     fzf-zsh
     zsh-fzf-tab
     fzf
@@ -56,8 +57,24 @@
 
   programs.git = {
     enable = true;
+    package = pkgs.gitFull;
     userName = data.fullName;
     userEmail = data.email;
+    aliases = {
+      co = "checkout";
+      ci = "commit";
+      st = "status";
+      gl = "log --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr) %C(bold blue)<%an>%Creset' --abbrev-commit";
+    };
+    extraConfig = {
+      color = {
+        diff = "auto";
+        status = "auto";
+        branch = "auto";
+      };
+      push.default = "simple";
+      init.defaultBranch = "main";
+    };
   };
 
   programs.zsh = {

@@ -23,8 +23,8 @@
   system.defaults.dock.orientation = "right";
   system.defaults.CustomUserPreferences = {
     "com.apple.dock" = {
-      orientation = "left";
-      autohide = false;
+      orientation = "bottom";
+      autohide = true;
     };
   };
   networking.computerName = "Walters Macbook Pro CNT";

@@ -8,6 +8,7 @@ in
     username = "waltermoreira";
     homeDirectory = "/Users/waltermoreira";
     email = "wmoreira@cnt.canon.com";
+    gitEmail = mainEmail;
     system = "x86_64-darwin";
     hostname = "Walters Macbook Pro CNT";
   };
@@ -16,6 +17,7 @@ in
     username = "waltermoreira";
     homeDirectory = "/home/waltermoreira.linux";
     email = mainEmail;
+    gitEmail = mainEmail;
     system = "x86_64-linux";
     hostname = "lima-nix";
   };
@@ -24,6 +26,7 @@ in
     username = "walter";
     homeDirectory = "/Users/walter";
     email = mainEmail;
+    gitEmail = mainEmail;
     system = "x86_64-darwin";
     hostname = "calvin";
   };

@@ -115,7 +115,7 @@ in
     enable = true;
     package = pkgs.gitFull;
     userName = data.fullName;
-    userEmail = data.email;
+    userEmail = data.gitEmail;
     aliases = {
       co = "checkout";
       ci = "commit";

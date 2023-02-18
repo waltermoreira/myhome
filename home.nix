@@ -31,6 +31,7 @@ in
     starship
     ponysay
     lesspipe
+    du-dust
     (rust-bin.stable.latest.default.override
       {
         targets = [

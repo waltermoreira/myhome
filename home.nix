@@ -18,7 +18,11 @@ in
   home.homeDirectory = data.homeDirectory;
   home.sessionVariables = {
     FOO = "foobar";
-  };
+  } // (if pkgs.stdenv.hostPlatform.isLinux then {
+    LD_LIBRARY_PATH = "${pkgs.zlib}/lib";
+  } else {
+    DYLD_FALLBACK_LIBRARY_PATH = "${pkgs.zlib}/lib";
+  });
 
   home.packages = with pkgs; [
     bashInteractive
@@ -32,6 +36,9 @@ in
     ponysay
     lesspipe
     du-dust
+    zlib
+    (python310Full.withPackages (p: [ p.numpy ]))
+    poetry
     (rust-bin.stable.latest.default.override
       {
         targets = [

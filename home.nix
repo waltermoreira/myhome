@@ -149,8 +149,6 @@ in
       if [[ -d $HOME/.dots ]]; then
         dotgit() { git --git-dir=$HOME/.dots --work-tree=$HOME $* }
         dotgit config --local status.showUntrackedFiles no
-      else
-        echo "dotgit is not cloned... ignoring"
       fi
     '';
     plugins = [

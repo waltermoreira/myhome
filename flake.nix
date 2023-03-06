@@ -16,9 +16,13 @@
       url = "github:oxalica/rust-overlay";
       inputs.nixpkgs.follows = "nixpkgs";
     };
+    nix-index-database = {
+      url = "github:Mic92/nix-index-database";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
   };
 
-  outputs = { nixpkgs, home-manager, darwin, rust-overlay, ... }:
+  outputs = { nixpkgs, home-manager, darwin, rust-overlay, nix-index-database, ... }:
     let
       homes = import ./systems.nix;
       pkgsForSystem = system:
@@ -29,7 +33,10 @@
       configurationForHome = systemName: data:
         home-manager.lib.homeManagerConfiguration {
           pkgs = (pkgsForSystem data.system);
-          modules = [ ./home.nix ];
+          modules = [
+            ./home.nix
+            nix-index-database.hmModules.nix-index
+          ];
           extraSpecialArgs = {
             inherit systemName data;
           };
@@ -43,7 +50,10 @@
             {
               home-manager.useGlobalPkgs = true;
               home-manager.useUserPackages = true;
-              home-manager.users.${data.username} = import ./home.nix;
+              home-manager.users.${data.username}.imports = [
+                ./home.nix
+                nix-index-database.hmModules.nix-index
+              ];
 
               users = {
                 users = {

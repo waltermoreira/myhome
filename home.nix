@@ -37,6 +37,7 @@ in
     lesspipe
     du-dust
     zlib
+    duf
     (python310Full.withPackages (p: [ p.numpy ]))
     poetry
     (rust-bin.stable.latest.default.override

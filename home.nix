@@ -185,6 +185,9 @@ in
       azure.disabled = true;
       buf.disabled = true;
       bun.disabled = true;
+      c = {
+        format = ''[\[$symbol($version(-$name))\]]($style)'';
+      };
       cmake.disabled = true;
       cobol.disabled = true;
       cmd_duration.format = ''[\[⏱ $duration\]]($style)'';

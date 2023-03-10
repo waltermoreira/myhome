@@ -1,6 +1,7 @@
 { config, pkgs, systemName, data, ... }:
 
 {
+  nix.settings.trusted-users = [ "root" data.username ];
   services.nix-daemon.enable = true;
   environment.systemPackages =
     [

@@ -279,5 +279,19 @@ in
   programs.less.enable = true;
   programs.lesspipe.enable = true;
 
+  xdg = pkgs.lib.attrsets.optionalAttrs pkgs.stdenv.hostPlatform.isLinux {
+    configFile."pypoetry/config.toml".text = ''
+      [virtualenvs]
+      in-project = true
+    '';
+  };
+
+  home.file =
+    pkgs.lib.attrsets.optionalAttrs pkgs.stdenv.hostPlatform.isDarwin {
+      "Library/Preferences/pypoetry/config.toml".text = ''
+        [virtualenvs]
+        in-project = true
+      '';
+    };
 }
 

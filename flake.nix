@@ -20,15 +20,31 @@
       url = "github:Mic92/nix-index-database";
       inputs.nixpkgs.follows = "nixpkgs";
     };
+    nurl = {
+      url = "github:nix-community/nurl";
+    };
   };
 
-  outputs = { nixpkgs, home-manager, darwin, rust-overlay, nix-index-database, ... }:
+  outputs =
+    { nixpkgs
+    , home-manager
+    , darwin
+    , rust-overlay
+    , nix-index-database
+    , nurl
+    , ...
+    }:
     let
       homes = import ./systems.nix;
       pkgsForSystem = system:
         import nixpkgs {
           inherit system;
-          overlays = [ (import rust-overlay) ];
+          overlays = [
+            (import rust-overlay)
+            (final: prev: {
+              nurl = nurl.packages.${system}.default;
+            })
+          ];
         };
       configurationForHome = systemName: data:
         home-manager.lib.homeManagerConfiguration {

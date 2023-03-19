@@ -50,6 +50,7 @@ in
     du-dust
     zlib
     duf
+    nurl
     (python310Full.withPackages (p: [ p.numpy ]))
     poetry
     (rust-bin.stable.latest.default.override

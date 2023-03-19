@@ -10,6 +10,18 @@ let
       sha256 = "086jl0bx83a3n259mal1sd0zg53iazl9z91iwfs4nrlabrp6nqh5";
     };
   };
+  onlyDarwinPackages =
+    let
+      notifier = pkgs.writeShellApplication {
+        name = "notifier";
+        text = ''
+          osascript -e "display notification \"$1\" with title \"$2\""
+        '';
+      };
+    in
+    pkgs.lib.optionals pkgs.stdenv.hostPlatform.isDarwin [
+      notifier
+    ];
 in
 {
   # Home Manager needs a bit of information about you and the
@@ -50,7 +62,7 @@ in
           "aarch64-apple-darwin"
         ];
       })
-  ];
+  ] ++ onlyDarwinPackages;
 
   # This value determines the Home Manager release that your
   # configuration is compatible with. This helps avoid breakage

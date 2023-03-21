@@ -51,10 +51,14 @@ in
     zlib
     duf
     nurl
+    cmake
+    gcc
+    rust-script
     (python310Full.withPackages (p: [ p.numpy ]))
     poetry
     (rust-bin.stable.latest.default.override
       {
+        extensions = [ "rust-src" ];
         targets = [
           "wasm32-unknown-unknown"
           "x86_64-unknown-linux-gnu"

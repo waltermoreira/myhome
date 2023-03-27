@@ -54,6 +54,8 @@ in
     cmake
     gcc
     rust-script
+    libiconv
+    pkg-config
     (python310Full.withPackages (p: [ p.numpy ]))
     poetry
     (rust-bin.stable.latest.default.override

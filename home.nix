@@ -56,6 +56,7 @@ in
     rust-script
     libiconv
     pkg-config
+    nix-tree
     (python310Full.withPackages (p: [ p.numpy ]))
     poetry
     (rust-bin.stable.latest.default.override

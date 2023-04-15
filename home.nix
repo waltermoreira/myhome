@@ -1,6 +1,7 @@
 { config, pkgs, systemName, data, ... }:
 
 let
+  config.allowUnfree = true;
   myWombat = pkgs.vimUtils.buildVimPluginFrom2Nix {
     name = "vim-wombat256grf";
     src = pkgs.fetchFromGitHub {
@@ -59,17 +60,22 @@ in
     nix-tree
     (python310Full.withPackages (p: [ p.numpy ]))
     poetry
-    (rust-bin.stable.latest.default.override
-      {
-        extensions = [ "rust-src" ];
-        targets = [
-          "wasm32-unknown-unknown"
-          "x86_64-unknown-linux-gnu"
-          "aarch64-unknown-linux-gnu"
-          "x86_64-apple-darwin"
-          "aarch64-apple-darwin"
-        ];
-      })
+    # (vscode-with-extensions.override {
+    #   vscodeExtensions = with vscode-extensions; [
+    #     formulahendry.code-runner
+    #   ];
+    # })
+    # (rust-bin.stable.latest.default.override
+    #   {
+    #     extensions = [ "rust-src" ];
+    #     targets = [
+    #       "wasm32-unknown-unknown"
+    #       "x86_64-unknown-linux-gnu"
+    #       "aarch64-unknown-linux-gnu"
+    #       "x86_64-apple-darwin"
+    #       "aarch64-apple-darwin"
+    #     ];
+    #   })
   ] ++ onlyDarwinPackages;
 
   # This value determines the Home Manager release that your

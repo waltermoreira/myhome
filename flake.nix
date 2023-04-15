@@ -45,6 +45,7 @@
               nurl = nurl.packages.${system}.default;
             })
           ];
+          config.allowUnfree = true;
         };
       configurationForHome = systemName: data:
         home-manager.lib.homeManagerConfiguration {

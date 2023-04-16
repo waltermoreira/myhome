@@ -60,6 +60,11 @@ in
     nix-tree
     (python310Full.withPackages (p: [ p.numpy ]))
     poetry
+    (makeMyVSCode {
+      extraSettings = {
+        "editor.minimap.enabled" = false;
+      };
+    })
     # (vscode-with-extensions.override {
     #   vscodeExtensions = with vscode-extensions; [
     #     formulahendry.code-runner

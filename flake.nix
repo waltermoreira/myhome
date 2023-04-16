@@ -23,6 +23,10 @@
     nurl = {
       url = "github:nix-community/nurl";
     };
+    myvscode = {
+      url = "github:waltermoreira/myvscode";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
   };
 
   outputs =
@@ -32,6 +36,7 @@
     , rust-overlay
     , nix-index-database
     , nurl
+    , myvscode
     , ...
     }:
     let
@@ -43,6 +48,9 @@
             (import rust-overlay)
             (final: prev: {
               nurl = nurl.packages.${system}.default;
+            })
+            (final: prev: {
+              makeMyVSCode = myvscode.makeMyVSCode final;
             })
           ];
           config.allowUnfree = true;

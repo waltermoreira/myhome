@@ -9,9 +9,9 @@
       pkgs.starship
       pkgs.libiconv
       pkgs.darwin.apple_sdk.sdk
-      # pkgs.darwin.apple_sdk.frameworks.CoreFoundation
-      # pkgs.darwin.apple_sdk.frameworks.CoreServices
-      # pkgs.darwin.apple_sdk.frameworks.Security
+      pkgs.darwin.apple_sdk.frameworks.CoreFoundation
+      pkgs.darwin.apple_sdk.frameworks.CoreServices
+      pkgs.darwin.apple_sdk.frameworks.Security
     ];
 
   # Use a custom configuration.nix location.

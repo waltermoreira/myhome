@@ -34,7 +34,7 @@ in
   } // (if pkgs.stdenv.hostPlatform.isLinux then {
     LD_LIBRARY_PATH = "${pkgs.zlib}/lib";
   } else {
-    DYLD_FALLBACK_LIBRARY_PATH = "${pkgs.zlib}/lib";
+    DYLD_FALLBACK_LIBRARY_PATH = "${pkgs.zlib}/lib:${pkgs.libiconv}/lib";
   });
 
   home.packages = with pkgs; [
@@ -58,6 +58,7 @@ in
     libiconv
     pkg-config
     nix-tree
+    node2nix
     (python310Full.withPackages (p: [ p.numpy ]))
     poetry
     (makeMyVSCode {

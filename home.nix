@@ -97,6 +97,11 @@ in
   # Let Home Manager install and manage itself.
   programs.home-manager.enable = true;
 
+  programs.broot = {
+    enable = true;
+    enableZshIntegration = true;
+  };
+
   programs.exa = {
     enable = true;
     enableAliases = true;

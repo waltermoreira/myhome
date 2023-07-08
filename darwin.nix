@@ -26,6 +26,8 @@
   programs.zsh.enable = true; # default shell on catalina
   # programs.fish.enable = true;
 
+  system.keyboard.enableKeyMapping = true;
+  system.keyboard.remapCapsLockToEscape = true;
   system.defaults.dock.orientation = "right";
   system.defaults.CustomUserPreferences = {
     "com.apple.dock" = {

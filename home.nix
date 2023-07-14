@@ -59,6 +59,7 @@ in
     pkg-config
     nix-tree
     node2nix
+    shellcheck
     (python310Full.withPackages (p: [ p.numpy ]))
     poetry
     (makeMyVSCode {

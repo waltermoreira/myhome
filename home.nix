@@ -60,6 +60,8 @@ in
     nix-tree
     node2nix
     shellcheck
+    go
+    hugo
     (python310Full.withPackages (p: [ p.numpy ]))
     poetry
     (makeMyVSCode {

@@ -25,6 +25,10 @@ let
     ];
 in
 {
+  nix.settings = {
+    sandbox = true;
+    experimental-features = "nix-command flakes";
+  };
   # Home Manager needs a bit of information about you and the
   # paths it should manage.
   home.username = data.username;
@@ -185,7 +189,7 @@ in
   programs.zsh = {
     enable = true;
     enableAutosuggestions = true;
-    enableSyntaxHighlighting = false;
+    syntaxHighlighting.enable = false;
     envExtra = ''
       if [[ -d $HOME/.dots ]]; then
         dotgit() { git --git-dir=$HOME/.dots --work-tree=$HOME $* }

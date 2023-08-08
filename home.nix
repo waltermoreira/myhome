@@ -70,6 +70,7 @@ in
     nix-tree
     node2nix
     shellcheck
+    rnix-lsp
     go
     hugo
     (python310Full.withPackages (p: [ p.numpy ]))

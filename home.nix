@@ -25,9 +25,15 @@ let
     ];
 in
 {
-  nix.settings = {
-    sandbox = true;
-    experimental-features = "nix-command flakes";
+  nix = {
+    settings = {
+      sandbox = true;
+      experimental-features = "nix-command flakes";
+      trusted-users = [ "root" data.username ];
+    };
+  } //
+  pkgs.lib.attrsets.optionalAttrs pkgs.stdenv.hostPlatform.isLinux {
+    package = pkgs.nix;
   };
   # Home Manager needs a bit of information about you and the
   # paths it should manage.

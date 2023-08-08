@@ -21,6 +21,15 @@ in
     system = "x86_64-linux";
     hostname = "lima-nix";
   };
+  lima2Vm = {
+    inherit fullName;
+    username = "waltermoreira";
+    homeDirectory = "/home/waltermoreira.linux";
+    email = mainEmail;
+    gitEmail = mainEmail;
+    system = "x86_64-linux";
+    hostname = "lima-nix2";
+  };
   calvin = {
     inherit fullName;
     username = "walter";

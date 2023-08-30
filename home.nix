@@ -73,6 +73,7 @@ in
     rnix-lsp
     go
     hugo
+    lastpass-cli
     (python310Full.withPackages (p: [ p.numpy ]))
     poetry
     (makeMyVSCode {

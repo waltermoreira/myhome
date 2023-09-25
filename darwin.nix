@@ -49,6 +49,7 @@
     enable = true;
     brews = [
       "lima"
+      "lastpass-cli"
     ];
   };
 }

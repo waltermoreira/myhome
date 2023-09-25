@@ -30,6 +30,8 @@ in
       sandbox = true;
       experimental-features = "nix-command flakes";
       trusted-users = [ "root" data.username ];
+      extra-trusted-substituters = "https://lean4.cachix.org/";
+      extra-trusted-public-keys = "lean4.cachix.org-1:mawtxSxcaiWE24xCXXgh3qnvlTkyU7evRRnGeAhD4Wk=";
     };
   } //
   pkgs.lib.attrsets.optionalAttrs pkgs.stdenv.hostPlatform.isLinux {
@@ -73,7 +75,8 @@ in
     rnix-lsp
     go
     hugo
-    lastpass-cli
+    zoxide
+    # lastpass-cli
     (python310Full.withPackages (p: [ p.numpy ]))
     poetry
     (makeMyVSCode {
@@ -111,6 +114,11 @@ in
 
   # Let Home Manager install and manage itself.
   programs.home-manager.enable = true;
+
+  programs.zoxide = {
+    enable = true;
+    enableZshIntegration = true;
+  };
 
   programs.broot = {
     enable = true;

@@ -43,6 +43,7 @@
 
   system.activationScripts.preActivation.text = ''
     echo "In preActivation"
+    ln -sf /etc/ssl/certs/ca-certificates.crt /etc/ssl/cert.pem
   '';
 
   homebrew = {

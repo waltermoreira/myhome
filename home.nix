@@ -23,6 +23,9 @@ let
     pkgs.lib.optionals pkgs.stdenv.hostPlatform.isDarwin [
       notifier
     ];
+  beancountPython = pkgs.python311.withPackages (
+    ps: [ ps.beancount ]
+  );
 in
 {
   nix = {
@@ -43,6 +46,7 @@ in
   home.homeDirectory = data.homeDirectory;
   home.sessionVariables = {
     FOO = "foobar";
+    BEANCOUNT_PYTHON = "${beancountPython}/bin/python";
   } // (if pkgs.stdenv.hostPlatform.isLinux then {
     LD_LIBRARY_PATH = "${pkgs.zlib}/lib";
   } else {

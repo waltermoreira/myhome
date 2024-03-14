@@ -4,6 +4,7 @@
   inputs = {
     # Specify the source of Home Manager and Nixpkgs.
     nixpkgs.url = "github:nixos/nixpkgs";
+    new-nixpkgs.url = "github:nixos/nixpkgs/24.05-pre";
     home-manager = {
       url = "github:nix-community/home-manager";
       inputs.nixpkgs.follows = "nixpkgs";
@@ -31,6 +32,7 @@
 
   outputs =
     { nixpkgs
+    , new-nixpkgs
     , home-manager
     , darwin
     , rust-overlay
@@ -55,6 +57,10 @@
           ];
           config.allowUnfree = true;
         };
+      newPkgsForSystem = system:
+        import new-nixpkgs {
+          inherit system;
+        };
       configurationForHome = systemName: data:
         home-manager.lib.homeManagerConfiguration {
           pkgs = (pkgsForSystem data.system);
@@ -64,12 +70,16 @@
           ];
           extraSpecialArgs = {
             inherit systemName data;
+            newPkgs = newPkgsForSystem data.system;
           };
         };
       darwinConfiguration = systemName: data:
         darwin.lib.darwinSystem {
           system = "x86_64-darwin";
-          specialArgs = { inherit systemName data; };
+          specialArgs = {
+            inherit systemName data;
+            newPkgs = newPkgsForSystem data.system;
+          };
           modules = [
             home-manager.darwinModules.home-manager
             {
@@ -95,6 +105,7 @@
               home-manager.extraSpecialArgs = {
                 inherit systemName data;
                 pkgs = (pkgsForSystem data.system);
+                newPkgs = (newPkgsForSystem data.system);
               };
             }
             ./darwin.nix

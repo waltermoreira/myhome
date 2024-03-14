@@ -1,4 +1,4 @@
-{ config, pkgs, systemName, data, ... }:
+{ config, pkgs, systemName, data, newPkgs, ... }:
 
 let
   config.allowUnfree = true;
@@ -38,8 +38,9 @@ in
     };
   } //
   pkgs.lib.attrsets.optionalAttrs pkgs.stdenv.hostPlatform.isLinux {
-    package = pkgs.nix;
+    package = newPkgs.nix;
   };
+
   # Home Manager needs a bit of information about you and the
   # paths it should manage.
   home.username = data.username;

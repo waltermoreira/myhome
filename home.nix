@@ -81,6 +81,8 @@ in
     go
     hugo
     zoxide
+    nix-output-monitor
+    newPkgs.nixd
     # lastpass-cli
     (python310Full.withPackages (p: [ p.numpy ]))
     poetry

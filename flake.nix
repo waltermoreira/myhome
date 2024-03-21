@@ -28,6 +28,9 @@
       url = "github:waltermoreira/myvscode";
       inputs.nixpkgs.follows = "nixpkgs";
     };
+    nixd = {
+      url = "github:nix-community/nixd/1.2.3";
+    };
   };
 
   outputs =
@@ -39,6 +42,7 @@
     , nix-index-database
     , nurl
     , myvscode
+    , nixd
     , ...
     }:
     let
@@ -60,6 +64,9 @@
       newPkgsForSystem = system:
         import new-nixpkgs {
           inherit system;
+          overlays = [
+            nixd.overlays.default
+          ];
         };
       configurationForHome = systemName: data:
         home-manager.lib.homeManagerConfiguration {

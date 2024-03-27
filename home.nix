@@ -38,7 +38,7 @@ in
     };
   } //
   pkgs.lib.attrsets.optionalAttrs pkgs.stdenv.hostPlatform.isLinux {
-    package = newPkgs.nix;
+    package = newPkgs.nixVersions.nix_2_20;
   };
 
   # Home Manager needs a bit of information about you and the
@@ -83,6 +83,8 @@ in
     zoxide
     nix-output-monitor
     newPkgs.nixd
+    newPkgs.nil
+    nixpkgs-fmt
     # lastpass-cli
     (python310Full.withPackages (p: [ p.numpy ]))
     poetry

@@ -31,6 +31,10 @@
     nixd = {
       url = "github:nix-community/nixd/1.2.3";
     };
+    agenix = {
+      # Update this when the MacOS build bug is fixed
+      url = "github:ryantm/agenix/0.14.0";
+    };
   };
 
   outputs =
@@ -43,6 +47,7 @@
     , nurl
     , myvscode
     , nixd
+    , agenix
     , ...
     }:
     let
@@ -54,6 +59,7 @@
             (import rust-overlay)
             (final: prev: {
               nurl = nurl.packages.${system}.default;
+              agenix = agenix.packages.${system}.default;
             })
             (final: prev: {
               makeMyVSCode = myvscode.makeMyVSCode final;

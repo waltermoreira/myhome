@@ -85,6 +85,7 @@ in
     newPkgs.nixd
     newPkgs.nil
     nixpkgs-fmt
+    agenix
     # lastpass-cli
     (python310Full.withPackages (p: [ p.numpy ]))
     poetry

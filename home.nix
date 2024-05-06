@@ -38,7 +38,7 @@ in
     };
   } //
   pkgs.lib.attrsets.optionalAttrs pkgs.stdenv.hostPlatform.isLinux {
-    package = newPkgs.nixVersions.nix_2_20;
+    package = newPkgs.nixVersions.nix_2_18;
   };
 
   # Home Manager needs a bit of information about you and the
@@ -86,6 +86,9 @@ in
     newPkgs.nil
     nixpkgs-fmt
     agenix
+    docker
+    mdbook
+    doggo
     # lastpass-cli
     (python310Full.withPackages (p: [ p.numpy ]))
     poetry

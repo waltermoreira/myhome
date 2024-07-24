@@ -56,6 +56,7 @@ in
 
   home.packages = with pkgs; [
     bashInteractive
+    rlwrap
     gitFull
     fzf-zsh
     zsh-fzf-tab
@@ -227,7 +228,7 @@ in
     '';
     plugins = [
       {
-        name = "fzf";
+        name = "fzf-zsh";
         src = "${pkgs.fzf-zsh}/share/zsh/plugins/fzf-zsh";
       }
       {

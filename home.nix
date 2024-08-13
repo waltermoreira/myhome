@@ -1,4 +1,4 @@
-{ config, pkgs, systemName, data, newPkgs, ... }:
+{ config, lib, pkgs, systemName, data, newPkgs, ... }:
 
 let
   config.allowUnfree = true;
@@ -30,7 +30,7 @@ in
 {
   nix = {
     settings = {
-      sandbox = true;
+      sandbox = false;
       experimental-features = "nix-command flakes";
       trusted-users = [ "root" data.username ];
       extra-trusted-substituters = "https://lean4.cachix.org/";
@@ -90,6 +90,7 @@ in
     docker
     mdbook
     doggo
+    rustup
     # lastpass-cli
     (python310Full.withPackages (p: [ p.numpy ]))
     poetry
@@ -367,5 +368,11 @@ in
         in-project = true
       '';
     };
+
+  home.activation = {
+    testActivation = lib.hm.dag.entryAfter [ "writeBoundary" ] ''
+      $DRY_RUN_CMD ${pkgs.rustup}/bin/rustup toolchain install 1.78 && ${pkgs.rustup}/bin/rustup default 1.78
+    '';
+  };
 }
 

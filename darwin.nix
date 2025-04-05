@@ -7,13 +7,12 @@
   pkgs.lib.attrsets.optionalAttrs pkgs.stdenv.hostPlatform.isDarwin {
     package = newPkgs.nix;
   };
-  services.nix-daemon.enable = true;
   environment.systemPackages =
     [
       pkgs.vim
       pkgs.starship
       pkgs.libiconv
-      pkgs.darwin.apple_sdk.sdk
+      pkgs.darwin.apple_sdk.sdkRoot
       pkgs.darwin.apple_sdk.frameworks.CoreFoundation
       pkgs.darwin.apple_sdk.frameworks.CoreServices
       pkgs.darwin.apple_sdk.frameworks.Security
@@ -51,11 +50,25 @@
     ln -sf /etc/ssl/certs/ca-certificates.crt /etc/ssl/cert.pem
   '';
 
+  fonts.packages = [
+    pkgs.victor-mono
+  ];
+
   homebrew = {
     enable = true;
     brews = [
       "lima"
       "lastpass-cli"
     ];
+    casks = [
+      "homerow"
+    ];
   };
+
+  security.sudo.extraConfig = ''
+    root            ALL = (ALL) NOPASSWD: ALL
+    %admin          ALL = (ALL) NOPASSWD: ALL
+  '';
+
+  system.stateVersion = 6;
 }

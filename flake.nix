@@ -105,7 +105,7 @@
 
               users = {
                 users = {
-                  waltermoreira = {
+                  ${data.username} = {
                     shell = nixpkgs.legacyPackages.${data.system}.zsh;
                     description = data.fullName;
                     home = data.homeDirectory;

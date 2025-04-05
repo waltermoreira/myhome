@@ -78,20 +78,19 @@ in
     nix-tree
     node2nix
     shellcheck
-    rnix-lsp
     go
     hugo
     zoxide
     nix-output-monitor
-    newPkgs.nixd
-    newPkgs.nil
+    nixd
+    nil
     nixpkgs-fmt
     agenix
     docker
     mdbook
     doggo
     rustup
-    # lastpass-cli
+    elan
     (python310Full.withPackages (p: [ p.numpy ]))
     poetry
     (makeMyVSCode {
@@ -140,9 +139,8 @@ in
     enableZshIntegration = true;
   };
 
-  programs.exa = {
+  programs.eza = {
     enable = true;
-    enableAliases = true;
   };
 
   programs.vim = {
@@ -219,7 +217,7 @@ in
 
   programs.zsh = {
     enable = true;
-    enableAutosuggestions = true;
+    autosuggestion.enable = true;
     syntaxHighlighting.enable = false;
     envExtra = ''
       if [[ -d $HOME/.dots ]]; then
@@ -372,6 +370,16 @@ in
   home.activation = {
     testActivation = lib.hm.dag.entryAfter [ "writeBoundary" ] ''
       $DRY_RUN_CMD ${pkgs.rustup}/bin/rustup toolchain install 1.78 && ${pkgs.rustup}/bin/rustup default 1.78
+    '';
+    elanActivation = lib.hm.dag.entryAfter [ "writeBoundary" ] ''
+      TOOLCHAIN=$(${pkgs.elan}/bin/elan show)
+      if [ "$TOOLCHAIN" = "no active toolchain" ]; then
+        echo "Setting default toolchain for Lean"
+        $DRY_RUN_CMD ${pkgs.elan}/bin/elan default stable
+      else
+        echo "Toolchain already configured"
+      fi
+      ${pkgs.elan}/bin/lake --version
     '';
   };
 }

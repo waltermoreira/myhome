@@ -90,6 +90,7 @@ in
     mdbook
     doggo
     rustup
+    newPkgs.texliveFull
     elan
     (python310Full.withPackages (p: [ p.numpy ]))
     poetry

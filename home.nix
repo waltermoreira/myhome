@@ -90,7 +90,11 @@ in
     docker
     mdbook
     doggo
-    rustup
+    newPkgs.texliveFull
+    #ghc
+    #cabal-install
+    #haskell-language-server
+    # rustup
     # lastpass-cli
     (python310Full.withPackages (p: [ p.numpy ]))
     poetry
@@ -370,9 +374,9 @@ in
     };
 
   home.activation = {
-    testActivation = lib.hm.dag.entryAfter [ "writeBoundary" ] ''
-      $DRY_RUN_CMD ${pkgs.rustup}/bin/rustup toolchain install 1.78 && ${pkgs.rustup}/bin/rustup default 1.78
-    '';
+    # testActivation = lib.hm.dag.entryAfter [ "writeBoundary" ] ''
+    #   $DRY_RUN_CMD ${pkgs.rustup}/bin/rustup toolchain install 1.78 && ${pkgs.rustup}/bin/rustup default 1.78
+    # '';
   };
 }
 

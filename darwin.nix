@@ -51,11 +51,11 @@
     ln -sf /etc/ssl/certs/ca-certificates.crt /etc/ssl/cert.pem
   '';
 
-  homebrew = {
-    enable = true;
-    brews = [
-      "lima"
-      "lastpass-cli"
-    ];
-  };
+  # homebrew = {
+  #   enable = true;
+  #   brews = [
+  #     "lima"
+  #     "lastpass-cli"
+  #   ];
+  # };
 }

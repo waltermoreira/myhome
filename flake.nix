@@ -5,6 +5,7 @@
     # Specify the source of Home Manager and Nixpkgs.
     nixpkgs.url = "github:nixos/nixpkgs";
     new-nixpkgs.url = "github:nixos/nixpkgs/24.05-pre";
+    new2-nixpkgs.url = "github:nixos/nixpkgs/24.05";
     home-manager = {
       url = "github:nix-community/home-manager";
       inputs.nixpkgs.follows = "nixpkgs";
@@ -15,7 +16,7 @@
     };
     rust-overlay = {
       url = "github:oxalica/rust-overlay";
-      inputs.nixpkgs.follows = "nixpkgs";
+      inputs.nixpkgs.follows = "new2-nixpkgs";
     };
     nix-index-database = {
       url = "github:Mic92/nix-index-database";

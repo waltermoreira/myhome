@@ -32,11 +32,33 @@
 
   system.keyboard.enableKeyMapping = true;
   system.keyboard.remapCapsLockToEscape = true;
-  system.defaults.dock.orientation = "right";
+  system.defaults.controlcenter.BatteryShowPercentage = true;
+  system.defaults.universalaccess.reduceTransparency = true;
+  system.defaults.controlcenter.Sound = true;
+  system.defaults.dock.show-recents = false;
+  system.defaults.dock.persistent-apps = [
+    {
+      app = "/System/Applications/Messages.app";
+    }
+  ];
   system.defaults.CustomUserPreferences = {
     "com.apple.dock" = {
       orientation = "bottom";
       autohide = true;
+    };
+    "com.apple.AppleMultitouchTrackpad" = {
+      TrackpadThreeFingerDrag = true;
+    };
+    "com.apple.assistant.support" = {
+      "Search Queries Data Sharing Status" = 2;
+    };
+    "com.apple.systemuiserver" = {
+      menuExtras = [
+        "/System/Library/CoreServices/Menu Extras/TimeMachine.menu"
+      ];
+    };
+    "com.apple.controlcenter" = {
+      "NSStatusItem Visible Bluetooth" = 1;
     };
   };
   networking.computerName = data.hostname;
@@ -45,10 +67,15 @@
     fooAlias = "echo 'foo alias'";
   };
 
-  system.activationScripts.preActivation.text = ''
-    echo "In preActivation"
-    ln -sf /etc/ssl/certs/ca-certificates.crt /etc/ssl/cert.pem
-  '';
+  system.activationScripts = {
+    preActivation.text = ''
+      ln -sf /etc/ssl/certs/ca-certificates.crt /etc/ssl/cert.pem
+    '';
+    postUserActivation.text = ''
+      /opt/homebrew/bin/defaultbrowser firefox
+      automator -i Aesthetic-vintage-flower-rose-background.jpg wallpaper.workflow
+    '';
+  };
 
   fonts.packages = [
     pkgs.victor-mono
@@ -59,9 +86,12 @@
     brews = [
       "lima"
       "lastpass-cli"
+      "defaultbrowser"
     ];
     casks = [
       "homerow"
+      "visual-studio-code"
+      "firefox"
     ];
   };
 

@@ -48,4 +48,13 @@ in
     system = "x86_64-darwin";
     hostname = "calvin";
   };
+  hobbes = {
+    inherit fullName;
+    username = "walter";
+    homeDirectory = "/Users/walter";
+    email = mainEmail;
+    gitEmail = mainEmail;
+    system = "aarch64-darwin";
+    hostname = "hobbes";
+  };
 }

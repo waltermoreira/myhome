@@ -88,7 +88,7 @@
         };
       darwinConfiguration = systemName: data:
         darwin.lib.darwinSystem {
-          system = "x86_64-darwin";
+          system = data.system;
           specialArgs = {
             inherit systemName data;
             newPkgs = newPkgsForSystem data.system;

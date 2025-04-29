@@ -34,6 +34,9 @@
   system.keyboard.remapCapsLockToEscape = true;
   system.defaults.controlcenter.BatteryShowPercentage = true;
   system.defaults.universalaccess.reduceTransparency = true;
+  system.defaults.NSGlobalDomain.NSAutomaticPeriodSubstitutionEnabled = false;
+  system.defaults.NSGlobalDomain.NSAutomaticQuoteSubstitutionEnabled = false;
+  system.defaults.controlcenter.Bluetooth = true;
   system.defaults.controlcenter.Sound = true;
   system.defaults.dock.show-recents = false;
   system.defaults.dock.persistent-apps = [
@@ -57,8 +60,8 @@
         "/System/Library/CoreServices/Menu Extras/TimeMachine.menu"
       ];
     };
-    "com.apple.controlcenter" = {
-      "NSStatusItem Visible Bluetooth" = 1;
+    "com.apple.TextInputMenu" = {
+      visible = true;
     };
   };
   networking.computerName = data.hostname;

@@ -36,6 +36,8 @@
   system.defaults.universalaccess.reduceTransparency = true;
   system.defaults.NSGlobalDomain.NSAutomaticPeriodSubstitutionEnabled = false;
   system.defaults.NSGlobalDomain.NSAutomaticQuoteSubstitutionEnabled = false;
+  system.defaults.NSGlobalDomain.AppleShowAllFiles = true;
+  system.defaults.NSGlobalDomain.ApplePressAndHoldEnabled = false;
   system.defaults.controlcenter.Bluetooth = true;
   system.defaults.controlcenter.Sound = true;
   system.defaults.dock.show-recents = false;
@@ -90,11 +92,19 @@
       "lima"
       "lastpass-cli"
       "defaultbrowser"
+      "docker"
+      {
+        name = "java";
+        link = true;
+      }
     ];
     casks = [
       "homerow"
       "visual-studio-code"
       "firefox"
+      "google-chrome"
+      "gimp"
+      "telegram"
     ];
   };
 

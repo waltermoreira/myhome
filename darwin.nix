@@ -93,6 +93,7 @@
       "lastpass-cli"
       "defaultbrowser"
       "docker"
+      "gh"
       {
         name = "java";
         link = true;

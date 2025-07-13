@@ -106,6 +106,8 @@
       "google-chrome"
       "gimp"
       "telegram"
+      "signal"
+      "xbar"
     ];
   };
 

@@ -94,6 +94,7 @@ in
     elan
     awscli2
     go-task
+    httpie
     (python310Full.withPackages (p: [ p.numpy ]))
     poetry
     (makeMyVSCode {

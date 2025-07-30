@@ -95,7 +95,7 @@ in
     awscli2
     go-task
     httpie
-    (python310Full.withPackages (p: [ p.numpy ]))
+    (python310Full.withPackages (p: [ p.numpy p.requests ]))
     poetry
     (makeMyVSCode {
       extraSettings = {

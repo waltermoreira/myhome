@@ -95,6 +95,7 @@ in
     awscli2
     go-task
     httpie
+    nodejs_23
     (python310Full.withPackages (p: [ p.numpy p.requests ]))
     poetry
     (makeMyVSCode {

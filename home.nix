@@ -96,6 +96,8 @@ in
     go-task
     httpie
     nodejs_23
+    git-annex
+    dvc
     (python310Full.withPackages (p: [ p.numpy p.requests ]))
     poetry
     (makeMyVSCode {

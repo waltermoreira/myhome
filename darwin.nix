@@ -108,6 +108,7 @@
       "telegram"
       "signal"
       "xbar"
+      "karabiner-elements"
     ];
   };
 

@@ -376,7 +376,9 @@ in
 
   home.activation = {
     testActivation = lib.hm.dag.entryAfter [ "writeBoundary" ] ''
-      $DRY_RUN_CMD ${pkgs.rustup}/bin/rustup toolchain install 1.78 && ${pkgs.rustup}/bin/rustup default 1.78
+      $DRY_RUN_CMD ${pkgs.rustup}/bin/rustup toolchain install 1.78 \
+        && ${pkgs.rustup}/bin/rustup default 1.78 \
+        && ${pkgs.rustup}/bin/rustup component add rust-src  
     '';
     elanActivation = lib.hm.dag.entryAfter [ "writeBoundary" ] ''
       TOOLCHAIN=$(${pkgs.elan}/bin/elan show)

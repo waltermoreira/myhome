@@ -98,6 +98,7 @@ in
     nodejs_23
     git-annex
     dvc
+    figlet
     (python310Full.withPackages (p: [ p.numpy p.requests ]))
     poetry
     (makeMyVSCode {

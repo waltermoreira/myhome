@@ -1,4 +1,4 @@
-{ config, lib, pkgs, systemName, data, newPkgs, ... }:
+{ config, lib, pkgs, systemName, data, newPkgs, newPkgs25, ... }:
 
 let
   config.allowUnfree = true;
@@ -99,6 +99,7 @@ in
     git-annex
     dvc
     figlet
+    newPkgs25.pandoc
     (python310Full.withPackages (p: [ p.numpy p.requests ]))
     poetry
     (makeMyVSCode {

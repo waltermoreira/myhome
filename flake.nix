@@ -5,6 +5,7 @@
     # Specify the source of Home Manager and Nixpkgs.
     nixpkgs.url = "github:nixos/nixpkgs";
     new-nixpkgs.url = "github:nixos/nixpkgs/24.05-pre";
+    new-nixpkgs-25.url = "github:nixos/nixpkgs/25.05";
     home-manager = {
       url = "github:nix-community/home-manager";
       inputs.nixpkgs.follows = "nixpkgs";
@@ -40,6 +41,7 @@
   outputs =
     { nixpkgs
     , new-nixpkgs
+    , new-nixpkgs-25
     , home-manager
     , darwin
     , rust-overlay
@@ -74,6 +76,8 @@
             nixd.overlays.default
           ];
         };
+      newPkgs25ForSystem = system:
+        import new-nixpkgs-25 { inherit system; };
       configurationForHome = systemName: data:
         home-manager.lib.homeManagerConfiguration {
           pkgs = (pkgsForSystem data.system);
@@ -84,6 +88,7 @@
           extraSpecialArgs = {
             inherit systemName data;
             newPkgs = newPkgsForSystem data.system;
+            newPkgs25 = newPkgs25ForSystem data.system;
           };
         };
       darwinConfiguration = systemName: data:
@@ -92,6 +97,7 @@
           specialArgs = {
             inherit systemName data;
             newPkgs = newPkgsForSystem data.system;
+            newPkgs25 = newPkgs25ForSystem data.system;
           };
           modules = [
             home-manager.darwinModules.home-manager
@@ -119,6 +125,7 @@
                 inherit systemName data;
                 pkgs = (pkgsForSystem data.system);
                 newPkgs = (newPkgsForSystem data.system);
+                newPkgs25 = (newPkgs25ForSystem data.system);
               };
             }
             ./darwin.nix

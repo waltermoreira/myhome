@@ -96,7 +96,6 @@ in
     go-task
     httpie
     nodejs_23
-    git-annex
     dvc
     figlet
     newPkgs25.pandoc

@@ -23,23 +23,20 @@ let
     pkgs.lib.optionals pkgs.stdenv.hostPlatform.isDarwin [
       notifier
     ];
-  beancountPython = pkgs.python311.withPackages (
-    ps: [ ps.beancount ]
-  );
 in
 {
-  nix = {
-    settings = {
-      sandbox = false;
-      experimental-features = "nix-command flakes";
-      trusted-users = [ "root" data.username ];
-      extra-trusted-substituters = "https://lean4.cachix.org/";
-      extra-trusted-public-keys = "lean4.cachix.org-1:mawtxSxcaiWE24xCXXgh3qnvlTkyU7evRRnGeAhD4Wk=";
-    };
-  } //
-  pkgs.lib.attrsets.optionalAttrs pkgs.stdenv.hostPlatform.isLinux {
-    package = newPkgs.nixVersions.nix_2_18;
-  };
+#  nix = {
+#    settings = {
+#      sandbox = false;
+#      experimental-features = "nix-command flakes";
+#      trusted-users = [ "root" data.username ];
+#      extra-trusted-substituters = "https://lean4.cachix.org/";
+#      extra-trusted-public-keys = "lean4.cachix.org-1:mawtxSxcaiWE24xCXXgh3qnvlTkyU7evRRnGeAhD4Wk=";
+#    };
+#  } //
+#  pkgs.lib.attrsets.optionalAttrs pkgs.stdenv.hostPlatform.isLinux {
+#    package = newPkgs.nixVersions.nix_2_18;
+#  };
 
   # Home Manager needs a bit of information about you and the
   # paths it should manage.
@@ -47,7 +44,6 @@ in
   home.homeDirectory = data.homeDirectory;
   home.sessionVariables = {
     FOO = "foobar";
-    BEANCOUNT_PYTHON = "${beancountPython}/bin/python";
   } // (if pkgs.stdenv.hostPlatform.isLinux then {
     LD_LIBRARY_PATH = "${pkgs.zlib}/lib";
   } else {
@@ -96,10 +92,10 @@ in
     go-task
     httpie
     nodejs_23
-    dvc
+    newPkgs25.dvc
     figlet
     newPkgs25.pandoc
-    (python310Full.withPackages (p: [ p.numpy p.requests ]))
+    python314
     poetry
     (makeMyVSCode {
       extraSettings = {

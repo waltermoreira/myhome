@@ -100,6 +100,9 @@
             newPkgs25 = newPkgs25ForSystem data.system;
           };
           modules = [
+            ({ ... }: {
+              nix.enable = false;
+            })
             home-manager.darwinModules.home-manager
             {
               home-manager.useGlobalPkgs = true;

@@ -1,12 +1,12 @@
 { config, pkgs, systemName, data, newPkgs, ... }:
 
 {
-  nix = {
-    settings.trusted-users = [ "root" data.username ];
-  } // 
-  pkgs.lib.attrsets.optionalAttrs pkgs.stdenv.hostPlatform.isDarwin {
-    package = newPkgs.nix;
-  };
+#  nix = {
+#    settings.trusted-users = [ "root" data.username ];
+#  } // 
+#  pkgs.lib.attrsets.optionalAttrs pkgs.stdenv.hostPlatform.isDarwin {
+#    package = newPkgs.nix;
+#  };
   environment.systemPackages =
     [
       pkgs.vim
@@ -77,8 +77,6 @@
       ln -sf /etc/ssl/certs/ca-certificates.crt /etc/ssl/cert.pem
     '';
     postUserActivation.text = ''
-      /opt/homebrew/bin/defaultbrowser firefox
-      automator -i Aesthetic-vintage-flower-rose-background.jpg wallpaper.workflow
     '';
   };
 
@@ -92,7 +90,6 @@
       "lima"
       "lastpass-cli"
       "defaultbrowser"
-      "docker"
       "gh"
       {
         name = "java";
@@ -101,7 +98,6 @@
     ];
     casks = [
       "homerow"
-      "visual-studio-code"
       "firefox"
       "google-chrome"
       "gimp"

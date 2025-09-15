@@ -23,9 +23,9 @@ let
     pkgs.lib.optionals pkgs.stdenv.hostPlatform.isDarwin [
       notifier
     ];
-  beancountPython = pkgs.python311.withPackages (
-    ps: [ ps.beancount ]
-  );
+#  beancountPython = newPkgs25.python314.withPackages (
+#    ps: [ ps.beancount ]
+#  );
 in
 {
   nix = {
@@ -38,7 +38,7 @@ in
     };
   } //
   pkgs.lib.attrsets.optionalAttrs pkgs.stdenv.hostPlatform.isLinux {
-    package = newPkgs.nixVersions.nix_2_18;
+    package = newPkgs.nixVersions.nix_2_28;
   };
 
   # Home Manager needs a bit of information about you and the
@@ -47,7 +47,6 @@ in
   home.homeDirectory = data.homeDirectory;
   home.sessionVariables = {
     FOO = "foobar";
-    BEANCOUNT_PYTHON = "${beancountPython}/bin/python";
   } // (if pkgs.stdenv.hostPlatform.isLinux then {
     LD_LIBRARY_PATH = "${pkgs.zlib}/lib";
   } else {

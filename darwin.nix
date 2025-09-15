@@ -1,11 +1,11 @@
-{ config, pkgs, systemName, data, newPkgs, ... }:
+{ config, pkgs, systemName, data, newPkgs, newPkgs25, ... }:
 
 {
   nix = {
     settings.trusted-users = [ "root" data.username ];
   } // 
   pkgs.lib.attrsets.optionalAttrs pkgs.stdenv.hostPlatform.isDarwin {
-    package = newPkgs.nix;
+    package = newPkgs25.nixVersions.nix_2_28;
   };
   environment.systemPackages =
     [

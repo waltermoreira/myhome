@@ -57,4 +57,13 @@ in
     system = "aarch64-darwin";
     hostname = "hobbes";
   };
+  tacc = {
+    inherit fullName;
+    username = "wmoreira";
+    homeDirectory = "/Users/wmoreira";
+    email = mainEmail;
+    gitEmail = mainEmail;
+    system = "aarch64-darwin";
+    hostname = "walter-macbook";
+  };
 }

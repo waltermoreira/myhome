@@ -47,6 +47,7 @@ in
   home.homeDirectory = data.homeDirectory;
   home.sessionVariables = {
     FOO = "foobar";
+    PATH = "$PATH:/opt/homebrew/bin";
   } // (if pkgs.stdenv.hostPlatform.isLinux then {
     LD_LIBRARY_PATH = "${pkgs.zlib}/lib";
   } else {

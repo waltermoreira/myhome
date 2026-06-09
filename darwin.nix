@@ -33,7 +33,7 @@
   system.keyboard.enableKeyMapping = true;
   system.keyboard.remapCapsLockToEscape = true;
   system.defaults.controlcenter.BatteryShowPercentage = true;
-  system.defaults.universalaccess.reduceTransparency = true;
+  system.defaults.universalaccess.reduceTransparency = false;
   system.defaults.NSGlobalDomain.NSAutomaticPeriodSubstitutionEnabled = false;
   system.defaults.NSGlobalDomain.NSAutomaticQuoteSubstitutionEnabled = false;
   system.defaults.NSGlobalDomain.AppleShowAllFiles = true;
@@ -94,6 +94,7 @@
       "defaultbrowser"
       "docker"
       "gh"
+      "openconnect"
       {
         name = "java";
         link = true;

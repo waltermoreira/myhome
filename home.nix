@@ -54,16 +54,17 @@ in
     DYLD_FALLBACK_LIBRARY_PATH = "${pkgs.zlib}/lib:${pkgs.libiconv}/lib";
   });
 
-  home.packages = with pkgs; [
+  home.packages = with newPkgs25; [
+    rustup
     bashInteractive
     rlwrap
-    gitFull
+    #gitFull
     fzf-zsh
     zsh-fzf-tab
     fzf
     ripgrep
     bat-extras.batpipe
-    starship
+    #starship
     ponysay
     lesspipe
     du-dust
@@ -71,7 +72,7 @@ in
     duf
     nurl
     cmake
-    gcc
+    # gcc
     rust-script
     libiconv
     pkg-config
@@ -80,28 +81,27 @@ in
     shellcheck
     go
     hugo
-    zoxide
+    #zoxide
     nix-output-monitor
     nixd
     nil
     nixpkgs-fmt
-    agenix
+    pkgs.agenix
     docker
     mdbook
     doggo
-    rustup
     newPkgs.texliveFull
     elan
     awscli2
     go-task
     httpie
-    nodejs_23
+    pkgs.nodejs_23
     dvc
     figlet
     newPkgs25.pandoc
     (python310Full.withPackages (p: [ p.numpy p.requests ]))
     poetry
-    (makeMyVSCode {
+    (pkgs.makeMyVSCode {
       extraSettings = {
         "editor.minimap.enabled" = false;
       };
@@ -376,11 +376,11 @@ in
     };
 
   home.activation = {
-    testActivation = lib.hm.dag.entryAfter [ "writeBoundary" ] ''
-      $DRY_RUN_CMD ${pkgs.rustup}/bin/rustup toolchain install 1.78 \
-        && ${pkgs.rustup}/bin/rustup default 1.78 \
-        && ${pkgs.rustup}/bin/rustup component add rust-src  
-    '';
+   testActivation = lib.hm.dag.entryAfter [ "writeBoundary" ] ''
+     $DRY_RUN_CMD ${pkgs.rustup}/bin/rustup toolchain install 1.96 \
+       && ${pkgs.rustup}/bin/rustup default 1.96 \
+       && ${pkgs.rustup}/bin/rustup component add rust-src  
+   '';
     elanActivation = lib.hm.dag.entryAfter [ "writeBoundary" ] ''
       TOOLCHAIN=$(${pkgs.elan}/bin/elan show)
       if [ "$TOOLCHAIN" = "no active toolchain" ]; then

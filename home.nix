@@ -48,6 +48,7 @@ in
   home.sessionVariables = {
     FOO = "foobar";
     PATH = "$PATH:/opt/homebrew/bin";
+    LPASS_AGENT_TIMEOUT = "86400";
   } // (if pkgs.stdenv.hostPlatform.isLinux then {
     LD_LIBRARY_PATH = "${pkgs.zlib}/lib";
   } else {
@@ -99,6 +100,7 @@ in
     dvc
     figlet
     newPkgs25.pandoc
+    uv
     (python310Full.withPackages (p: [ p.numpy p.requests ]))
     poetry
     (pkgs.makeMyVSCode {
